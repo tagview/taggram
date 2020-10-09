@@ -1,6 +1,6 @@
 const faker = require("faker");
 const { Router } = require("express");
-const { propEq, pick, merge, keys, takeLast } = require("ramda");
+const { propEq, pick, keys, takeLast } = require("ramda");
 const { Either } = require("ramda-fantasy");
 const { Random } = require("random-js");
 
@@ -90,11 +90,11 @@ const build = ({ posts, users, comments, commentLimit, successRate }) => {
 
     failRandomly(forceSuccess ? 1 : successRate)
       .chain(() => requirePostByUUID(posts)(uuid))
-      .chain(post => requireFields({ username, message }).map(merge({ post })))
-      .chain(data => requireUserByUsername(users)(username).map(user => ({ ...data, user })))
+      .chain(() => requireFields({ username, message }))
+      .chain(() => requireUserByUsername(users)(username))
       .either(
         error => res.status(error.status).json(error),
-        ({ post, user }) => {
+        user => {
           const createdAt = new Date();
           const comment = {
             user,
