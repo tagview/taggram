@@ -67,7 +67,6 @@ const failRandomly = successRate => {
 };
 
 const build = ({ posts, users, comments, commentLimit, successRate }) => {
-  const limitComments = takeLast(commentLimit);
   const router = Router();
 
   router.get("/me", (req, res) => res.json(faker.random.arrayElement(users)));
@@ -77,7 +76,7 @@ const build = ({ posts, users, comments, commentLimit, successRate }) => {
 
     res.json({
       ...post,
-      comments: limitComments(comments[post.uuid] || []),
+      comments: comments[post.uuid] || [],
     });
   });
 
@@ -104,9 +103,9 @@ const build = ({ posts, users, comments, commentLimit, successRate }) => {
 
           const postComments = comments[uuid] || [];
 
-          comments[uuid] = [...postComments, comment];
+          comments[uuid] = takeLast(commentLimit, [...postComments, comment]);
 
-          res.json(limitComments(comments[uuid]));
+          res.json(comments[uuid]);
         }
       );
   });

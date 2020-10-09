@@ -5,7 +5,7 @@ const faker = require("faker");
 const fs = require("fs").promises;
 const http = require("http");
 const path = require("path");
-const { prop } = require("ramda");
+const { prop, takeLast } = require("ramda");
 const { Maybe } = require("ramda-fantasy");
 
 const { buildComment } = require("./factories");
@@ -47,7 +47,7 @@ const run = async () => {
       const comment = buildComment({ user, created_at: new Date() });
       const postComments = comments[post.uuid] || [];
 
-      comments[post.uuid] = [...postComments, comment];
+      comments[post.uuid] = takeLast(commentLimit, [...postComments, comment]);
     });
   }, seedingInterval);
 
