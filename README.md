@@ -9,7 +9,7 @@ Estamos empolgados que você se interessou em fazer parte da equipe Tagview! Mon
 ## Implementação
 Taggram é um site onde os usuários conseguem publicar comentários em uma foto.
 
-A sua implementação deve obter os dados através da [API](#api), se basear no [layout](#layout) e seguir os [requisitos](#requisitos).
+A sua implementação deve se basear no [layout](#layout), obter os dados através da [API](#api) e seguir os [requisitos](#requisitos).
 
 Em [/base](base) você encontra um esqueleto da aplicação com alguns exemplos, leia o código com atenção e implemente a sua solução a partir dele.
 
@@ -36,6 +36,7 @@ Analisamos mais do que somente o resultado final então nos envie a sua soluçã
 - Capacidade de assimilar um conteúdo novo
 - Organização
 - Atenção aos requisitos
+- Preocupação com a usabilidade (experiência do usuário)
 - Empenho em entregar algo, mesmo que minimamente funcional
 - Tratamento de erros
 
