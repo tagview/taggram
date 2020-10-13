@@ -1,0 +1,26 @@
+{
+  "name": "taggram",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:tagview/taggram.git",
+  "author": "Tagview",
+  "license": "MIT",
+  "engines": {
+    "node": "~12.19.0"
+  },
+  "scripts": {
+    "start": "node api/index.js",
+    "build-posts": "node api/build-posts.js"
+  },
+  "private": true,
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "faker": "^5.1.0",
+    "morgan": "^1.10.0",
+    "ramda": "^0.27.1",
+    "ramda-fantasy": "^0.8.0",
+    "random-js": "^2.1.0"
+  }
+}
