@@ -129,7 +129,7 @@ created_at | String | Data de criação no formato ISO 8601
 ## Respostas de erro
 
 ### Erro aleatório
-Lançado intencionalmente com a probabilidade de 33%. Saiba mais.
+Lançado intencionalmente com a probabilidade de 33%. [Saiba mais](#atenção-warning).
 
 Campo      | Sobre
 -----------|------

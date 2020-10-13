@@ -4,8 +4,10 @@ Olá!
 
 Estamos empolgados que você se interessou em fazer parte da equipe Tagview! Montamos um desafio baseado em um problema semelhante aos que resolvemos no nosso dia-a-dia para conhecer um pouco mais sobre você.
 
+![Preview](preview.gif)
+
 ## Implementação
-Taggram é uma aplicação web onde os usuários conseguem publicar comentários em uma foto.
+Taggram é um site onde os usuários conseguem publicar comentários em uma foto.
 
 A sua implementação deve obter os dados através da [API](#api), se basear no [layout](#layout) e seguir os [requisitos](#requisitos).
 
@@ -19,7 +21,7 @@ Desenvolvemos uma API REST que deve ser utilizada para obter os dados dos usuár
 
 ### Requisitos
 1. A aplicação deve exibir os dados da publicação, do usuário e permitir que ele envie comentários
-2. Quando a requisição para enviar um comentário falhar, exibir um alerta avisando o usuário que o `Comentário não foi enviado, tente novamente`. Você pode usar o `Window.alert` ou outro componente visual para exibir essa mensagem
+2. Quando a requisição para [enviar um comentário falhar](API.md#atenção-warning), exibir um alerta avisando o usuário que o `Comentário não foi enviado, tente novamente`. Você pode usar o `Window.alert` ou outro componente visual para exibir essa mensagem
 3. Você pode continuar a implementação sem nenhum framework ou escolher entre ReactJS, AngularJS ou VueJS
 4. Você pode utilizar qualquer outra biblioteca que achar necessário (jQuery, por exemplo)
 5. **As requisições para a API devem ser feitas client-side (no próprio navegador)**. **Não** queremos que você utilize JSP, ASP ou qualquer ferramenta server-side.
