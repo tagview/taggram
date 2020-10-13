@@ -11,19 +11,28 @@ https://taggram.herokuapp.com
 Informa os dados de um usuário. É ele que aparece na barra do topo da página e deverá ser o autor dos comentários criados.
 
 ###### Resposta
-Um [usuário](#usuário) aleatório. Exemplo:
+Um [usuário](#usuário) aleatório.
+
+<details>
+<summary>Exemplo</summary>
+
 ```
 {
   "username": "Mervin.Crooks11",
   "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/stayuber/128.jpg"
 }
 ```
+</details>
 
 #### GET /post
 Informa os dados de uma publicação. Ela deve ser exibida no centro da página.
 
 ###### Resposta
-Uma [publicação](#publicação) aleatória. Exemplo:
+Uma [publicação](#publicação) aleatória.
+
+<details>
+<summary>Exemplo</summary>
+
 ```
 {
   "uuid": "f198e91a-1819-4da1-b7af-80a3aa9f3c90",
@@ -49,6 +58,7 @@ Uma [publicação](#publicação) aleatória. Exemplo:
   ]
 }
 ```
+</details>
 
 #### POST /posts/*{postUUID}*/comments
 Cria um novo comentário em uma publicação. `{postUUID}` é o `uuid` da publicação exibida.
@@ -64,16 +74,23 @@ Campo      | Requerido | Tipo   | Sobre
 username   | Sim       | String | Username do usuário autor
 message    | Sim       | String | Conteúdo do comentário
 
-Exemplo:
+<details>
+<summary>Exemplo</summary>
+
 ```
 {
   "username": "Brielle48",
   "message": "hello world"
 }
 ```
+</details>
 
 ###### Resposta
-A lista de [comentários](#comentário) atualizada com os últimos comentários e contendo o que você adicionou. Exemplo:
+A lista de [comentários](#comentário) atualizada com os últimos comentários e contendo o que você adicionou.
+
+<details>
+<summary>Exemplo</summary>
+
 ```
 [  
   {
@@ -94,6 +111,7 @@ A lista de [comentários](#comentário) atualizada com os últimos comentários 
   }
 ]
 ```
+</details>
 
 ## Entidades
 
