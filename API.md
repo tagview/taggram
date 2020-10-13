@@ -67,7 +67,7 @@ Cria um novo comentário em uma publicação. `{postUUID}` é o `uuid` da public
 > Esse endpoint retorna [um erro](#erro-aleatório) **intencionalmente** em um terço das chamadas, você deve tratar esse erro como está [especificado nos requisitos](README.md#requisitos). Porém, durante o desenvolvimento você pode forçar que os erros deixem de ser lançados utilizando o parâmetro `stable`: `POST /posts/{postUUID}/comments?stable=true`.
 
 ###### Requisição
-Se algum campo obrigatório não for informado ou possuir um valor inválido a API [retorna um erro](#respostas-de-erro).
+Deve seguir o formado `application/json`. Se algum campo obrigatório não for informado ou possuir um valor inválido a API [retorna um erro](#respostas-de-erro).
 
 Campo      | Requerido | Tipo   | Sobre
 -----------|-----------|--------|------
