@@ -7,7 +7,7 @@ https://taggram.herokuapp.com
 
 ## Endpoints
 
-#### GET /me
+### GET /me
 Informa os dados de um usuário. É ele que aparece na barra do topo da página e deverá ser o autor dos comentários criados.
 
 ###### Resposta
@@ -24,7 +24,7 @@ Um [usuário](#usuário) aleatório.
 ```
 </details>
 
-#### GET /post
+### GET /post
 Informa os dados de uma publicação. Ela deve ser exibida no centro da página.
 
 ###### Resposta
@@ -60,7 +60,7 @@ Uma [publicação](#publicação) aleatória.
 ```
 </details>
 
-#### POST /posts/*{postUUID}*/comments
+### POST /posts/*{postUUID}*/comments
 Cria um novo comentário em uma publicação. `{postUUID}` é o `uuid` da publicação exibida.
 
 ##### ATENÇÃO :warning:
