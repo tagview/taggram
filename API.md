@@ -134,7 +134,7 @@ Lançado intencionalmente com a probabilidade de 33%. [Saiba mais](#atenção-wa
 Campo      | Sobre
 -----------|------
 type       | `random_error`
-status     | 418
+status     | 500
 
 ### Publicação não encontrada
 Lançado quando o `uuid` informado não se refere a nenhuma publicação válida.
