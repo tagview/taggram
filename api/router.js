@@ -58,8 +58,9 @@ const failRandomly = successRate => {
   if (!isSuccessful) {
     return Either.Left({
       status: 500,
-      type: "unexpected",
-      error: "Unexpected error",
+      type: "random_error",
+      error: "Random error",
+      src: "https://github.com/tagview/taggram/blob/main/API.md#aten%C3%A7%C3%A3o-warning"
     });
   }
 
