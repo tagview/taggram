@@ -53,7 +53,7 @@ Uma [publicação](#publicação) aleatória. Exemplo:
 #### POST /posts/*{postUUID}*/comments
 Cria um novo comentário em uma publicação. `{postUUID}` é o `uuid` da publicação exibida.
 
-**ATENÇÃO** :warning:
+##### ATENÇÃO :warning:
 > Esse endpoint retorna [um erro](#erro-aleatório) **intencionalmente** em um terço das chamadas, você deve tratar esse erro como está [especificado nos requisitos](README.md#requisitos). Porém, durante o desenvolvimento você pode forçar que os erros deixem de ser lançados utilizando o parâmetro `stable`: `POST /posts/{postUUID}/comments?stable=true`.
 
 ###### Requisição
@@ -73,7 +73,7 @@ Exemplo:
 ```
 
 ###### Resposta
-Uma lista de [comentários](#comentário). Exemplo:
+A lista de [comentários](#comentário) atualizada com os últimos comentários e contendo o que você adicionou. Exemplo:
 ```
 [  
   {
