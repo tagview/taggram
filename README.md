@@ -4,7 +4,7 @@ Olá!
 
 Estamos empolgados que você se interessou em fazer parte da equipe Tagview! Montamos um desafio baseado em um problema semelhante aos que resolvemos no nosso dia-a-dia para conhecer um pouco mais sobre você.
 
-![Preview](preview.gif)
+![Preview](preview.png)
 
 ## Implementação
 Taggram é um site onde os usuários conseguem publicar comentários em uma foto.
