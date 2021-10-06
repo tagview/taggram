@@ -1,10 +1,15 @@
 const faker = require("faker");
 const { Router } = require("express");
-const { propEq, pick, keys, takeLast } = require("ramda");
+const { propEq, pick, keys, takeLast, complement, values, uniq } = require("ramda");
 const { Either } = require("ramda-fantasy");
 const { Random } = require("random-js");
 
 const { isBlank, isPresent } = require("./utils");
+const { buildUser } = require("./factories");
+
+const findCommentByUUID = comments => uuid => {
+  return values(comments).flat().find(propEq("uuid", uuid));
+};
 
 const requirePostByUUID = posts => uuid => {
   const post = posts.find(propEq("uuid", uuid));
@@ -19,6 +24,21 @@ const requirePostByUUID = posts => uuid => {
   }
 
   return Either.of(post);
+};
+
+const requireCommentByUUID = comments => uuid => {
+  const comment = findCommentByUUID(comments)(uuid);
+
+  if (isBlank(comment)) {
+    return Either.Left({
+      status: 404,
+      type: "comment_not_found",
+      error: "Comment not found",
+      uuid,
+    });
+  }
+
+  return Either.of(comment);
 };
 
 const requireUserByUsername = users => username => {
@@ -69,44 +89,101 @@ const failRandomly = successRate => {
 
 const build = ({ posts, users, comments, commentLimit, successRate }) => {
   const router = Router();
+  const likes = {};
 
-  router.get("/me", (req, res) => res.json(faker.random.arrayElement(users)));
+  const buildComment = username => comment => {
+    const commentLikes = likes[comment.uuid] || [];
+    const hasLiked = !!commentLikes.find(item => item === username);
 
-  router.get("/post", (req, res) => {
-    const post = faker.random.arrayElement(posts);
+    return { ...comment, has_liked: hasLiked, like_count: commentLikes.length };
+  };
 
-    res.json({
-      ...post,
-      comments: comments[post.uuid] || [],
-    });
+  const buildPost = username => post => {
+    const postComments = comments[post.uuid] || [];
+
+    return { ...post, comments: postComments.map(buildComment(username)) };
+  };
+
+  router.get("/me", (req, res) => {
+    const user = faker.random.arrayElement(users);
+
+    res.json(user);
   });
 
-  router.post("/posts/:uuid/comments", (req, res) => {
-    const { username, message } = req.body;
-    const { uuid } = req.params;
-    const { stable } = req.query;
+  router.get("/post", (req, res) => {
+    const { username } = req.query;
+    const post = faker.random.arrayElement(posts);
 
-    const forceSuccess = /true/i.test(stable);
+    requireUserByUsername(users)(username)
+      .either(
+        error => res.status(error.status).json(error),
+        () => res.json(buildPost(username)(post))
+      );
+  });
+
+  router.get("/posts/:uuid/related", (req, res) => {
+    const { uuid } = req.params;
+
+    requirePostByUUID(posts)(uuid)
+      .either(
+        error => res.status(error.status).json(error),
+        () => {
+          const relatedPosts = faker.random.arrayElements(posts, 6).filter(complement(propEq("uuid", uuid)));
+          const postsWithComments = relatedPosts.map(post => {
+            const postComments = comments[post.uuid] || [];
+
+            return { ...pick(['uuid', 'photo'], post), comment_count: postComments.length };
+          });
+
+          res.json(postsWithComments);
+        }
+      );
+  });
+
+  router.post("/comments/:uuid/like", (req, res) => {
+    const { uuid } = req.params;
+    const { username } = req.body;
+    const { force } = req.query;
+
+    const forceSuccess = /true/i.test(force);
 
     failRandomly(forceSuccess ? 1 : successRate)
-      .chain(() => requirePostByUUID(posts)(uuid))
-      .chain(() => requireFields({ username, message }))
+      .chain(() => requireCommentByUUID(comments)(uuid))
+      .chain(() => requireFields({ username }))
       .chain(() => requireUserByUsername(users)(username))
       .either(
         error => res.status(error.status).json(error),
-        user => {
-          const createdAt = new Date();
-          const comment = {
-            user,
-            message,
-            created_at: createdAt.toISOString(),
-          };
+        () => {
+          const commentLikes = likes[uuid] || [];
+          const comment = findCommentByUUID(comments)(uuid);
 
-          const postComments = comments[uuid] || [];
+          likes[uuid] = uniq([...commentLikes, username]);
 
-          comments[uuid] = takeLast(commentLimit, [...postComments, comment]);
+          res.json(buildComment(username)(comment));
+        }
+      );
+  });
 
-          res.json(comments[uuid]);
+  router.post("/comments/:uuid/unlike", (req, res) => {
+    const { uuid } = req.params;
+    const { username } = req.body;
+    const { force } = req.query;
+
+    const forceSuccess = /true/i.test(force);
+
+    failRandomly(forceSuccess ? 1 : successRate)
+      .chain(() => requireCommentByUUID(comments)(uuid))
+      .chain(() => requireFields({ username }))
+      .chain(() => requireUserByUsername(users)(username))
+      .either(
+        error => res.status(error.status).json(error),
+        () => {
+          const commentLikes = likes[uuid] || [];
+          const comment = findCommentByUUID(comments)(uuid);
+
+          likes[uuid] = commentLikes.filter(item => item !== username);
+
+          res.json(buildComment(username)(comment));
         }
       );
   });

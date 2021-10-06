@@ -7,7 +7,7 @@ const { buildPost, buildUser } = require("./factories");
 
 const build = async (file, size) => {
   const posts = times(() => {
-    const hasAvatar = faker.random.boolean();
+    const hasAvatar = faker.datatype.boolean();
 
     return hasAvatar
       ? buildPost()
