@@ -21,18 +21,18 @@ Desenvolvemos uma API REST que deve ser utilizada para obter os dados dos usuár
 
 ### Requisitos
 1. A aplicação deve exibir:
-    a. Os dados do usuário
-    b. Os dados da publicação
-    c. A lista de comentários da publicação
+    - Os dados do usuário
+    - Os dados da publicação
+    - A lista de comentários da publicação
 2. A aplicação deve exibir a lista de publicações relacionadas ("mais publicações")
-   a. Você deve exibir na lista **somente** as publicações relacionadas que possuírem **pelo menos 3 comentários**
-2. A aplicação deve permitir:
-    a. Que o usuário curta um comentário, e atualizar o contador de curtidas
-    b. Que o usuário remova a sua curtida de um comentário, e atualizar o contador de curtidas
-3. Quando as requisições para [curtir ou remover curtida de um comentário falharem](API.md#atenção-warning), exibir um alerta avisando o usuário que o `Não foi possível curtir/descurtir comentário, tente novamente`. Você pode usar o `Window.alert` ou outro elemento visual para exibir essa mensagem
-4. Você pode continuar a implementação sem nenhum framework ou escolher entre ReactJS, AngularJS ou VueJS
-5. Você pode utilizar qualquer outra biblioteca que achar necessário (jQuery, por exemplo)
-6. **As requisições para a API devem ser feitas client-side (no próprio navegador)**. **Não** queremos que você utilize JSP, ASP ou qualquer ferramenta server-side.
+   - Você deve exibir na lista **somente** as publicações relacionadas que possuírem **pelo menos 3 comentários**
+3. A aplicação deve permitir:
+    - Que o usuário curta um comentário, e atualizar o contador de curtidas
+    - Que o usuário remova a sua curtida de um comentário, e atualizar o contador de curtidas
+4. Quando as requisições para [curtir ou remover curtida de um comentário falharem](API.md#atenção-warning), exibir um alerta avisando o usuário que o `Não foi possível curtir/descurtir comentário, tente novamente`. Você pode usar o `Window.alert` ou outro elemento visual para exibir essa mensagem
+5. Você pode continuar a implementação sem nenhum framework ou escolher entre ReactJS, AngularJS ou VueJS
+6. Você pode utilizar qualquer outra biblioteca que achar necessário (jQuery, por exemplo)
+7. **As requisições para a API devem ser feitas client-side (no próprio navegador)**. **Não** queremos que você utilize JSP, ASP ou qualquer ferramenta server-side.
 
 ## Submissão
 Envie o URL de um repositório git público por email para `team@tagview.com.br`. Usamos bastante o [GitHub](https://github.com) e o [GitLab](https://gitlab.com).
