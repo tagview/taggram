@@ -24,8 +24,15 @@ Um [usuário](#usuário) aleatório.
 ```
 </details>
 
-### GET /post
+### GET /post?username=*{username}*
 Informa os dados de uma publicação. Ela deve ser exibida no centro da página.
+
+###### Requisição
+Se algum campo obrigatório não for informado ou possuir um valor inválido a API [retorna um erro](#respostas-de-erro).
+
+Campo      | Requerido | Tipo   | Sobre
+-----------|-----------|--------|------
+username   | Sim       | String | Username do usuário atual obtido em `GET /me`
 
 ###### Resposta
 Uma [publicação](#publicação) aleatória.
@@ -48,23 +55,56 @@ Uma [publicação](#publicação) aleatória.
   },
   "comments": [
     {
+      "uuid": "f53c17e6-1d34-4b16-9e63-ad05d7d67064",
       "user": {
         "username": "Cali83",
         "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/cyril_gaillard/128.jpg"
       },
       "message": "We need to transmit the auxiliary IB port!",
-      "created_at": "2020-10-09T23:02:20.716Z"
+      "created_at": "2020-10-09T23:02:20.716Z",
+      "has_liked": true,
+      "like_count": 2
     }
   ]
 }
 ```
 </details>
 
-### POST /posts/*{postUUID}*/comments
-Cria um novo comentário em uma publicação. `{postUUID}` é o `uuid` da publicação exibida.
+### GET /post/*{postUUID}*/related
+Informa a lista de publicações relacionadas, deve ser exibida em "mais publicações". `{postUUID}` é o `uuid` da publicação exibida.
+
+###### Resposta
+Uma lista de [publicações relacionadas](#publicação-relacionada).
+
+<details>
+<summary>Exemplo</summary>
+
+```
+[
+  {
+    "uuid": "fae06f51-1f20-473f-b0db-48f5c54c6ad1",
+    "photo": "https://source.unsplash.com/random/800x800",
+    "commentCount": 0
+  },
+  {
+    "uuid": "86be3283-6014-4cc2-ac07-eb73cdd1fc26",
+    "photo": "https://source.unsplash.com/random/800x800",
+    "commentCount": 4
+  },
+  {
+    "uuid": "34aef4b8-5c9e-4ab3-89fb-a5b962ac6ee1",
+    "photo": "https://source.unsplash.com/random/800x800",
+    "commentCount": 2
+  }
+]
+```
+</details>
+
+### POST /comments/*{commentUUID}*/like
+**Adiciona** uma curtida em um comentário. `{commentUUID}` é o `uuid` do comentário selecionado.
 
 ##### ATENÇÃO :warning:
-> Esse endpoint retorna [um erro](#erro-aleatório) **intencionalmente** em um terço das chamadas, você deve tratar esse erro como está [especificado nos requisitos](README.md#requisitos). Porém, durante o desenvolvimento você pode forçar que os erros deixem de ser lançados utilizando o parâmetro `stable`: `POST /posts/{postUUID}/comments?stable=true`.
+> Esse endpoint retorna [um erro](#erro-aleatório) **intencionalmente** algumas vezes, você deve tratar esse erro como está [especificado nos requisitos](README.md#requisitos). Porém, durante o desenvolvimento você pode forçar que os erros deixem de ser lançados utilizando o parâmetro `force`: `POST /comments/*{commentUUID}*/like?force=true`.
 
 ###### Requisição
 Deve seguir o formato `application/json`. Se algum campo obrigatório não for informado ou possuir um valor inválido a API [retorna um erro](#respostas-de-erro).
@@ -72,44 +112,79 @@ Deve seguir o formato `application/json`. Se algum campo obrigatório não for i
 Campo      | Requerido | Tipo   | Sobre
 -----------|-----------|--------|------
 username   | Sim       | String | Username do usuário autor
-message    | Sim       | String | Conteúdo do comentário
 
 <details>
 <summary>Exemplo</summary>
 
 ```
 {
-  "username": "Brielle48",
-  "message": "hello world"
+  "username": "Brielle48"
 }
 ```
 </details>
 
 ###### Resposta
-A lista de [comentários](#comentário) atualizada com os últimos comentários e contendo o que você adicionou.
+O [comentário](#comentário) atualizado.
 
 <details>
 <summary>Exemplo</summary>
 
 ```
-[  
-  {
-    "user": {
-      "username": "Cali83",
-      "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/cyril_gaillard/128.jpg"
-    },
-    "message": "We need to transmit the auxiliary IB port!",
-    "created_at": "2020-10-09T23:02:20.716Z"
+{
+  "uuid": "f53c17e6-1d34-4b16-9e63-ad05d7d67064",
+  "user": {
+    "username": "Cali83",
+    "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/cyril_gaillard/128.jpg"
   },
-  {
-    "user": {
-      "username": "Brielle48",
-      "avatar": null
-    },
-    "message": "hello world",
-    "created_at": "2020-10-09T23:55:59.531Z"
-  }
-]
+  "message": "We need to transmit the auxiliary IB port!",
+  "created_at": "2020-10-09T23:02:20.716Z",
+  "has_liked": true,
+  "like_count": 2
+}
+```
+</details>
+
+### POST /comments/*{commentUUID}*/unlike
+**Remove** uma curtida em um comentário. `{commentUUID}` é o `uuid` do comentário selecionado.
+
+##### ATENÇÃO :warning:
+> Esse endpoint retorna [um erro](#erro-aleatório) **intencionalmente** algumas vezes, você deve tratar esse erro como está [especificado nos requisitos](README.md#requisitos). Porém, durante o desenvolvimento você pode forçar que os erros deixem de ser lançados utilizando o parâmetro `force`: `POST /comments/*{commentUUID}*/like?force=true`.
+
+###### Requisição
+Deve seguir o formato `application/json`. Se algum campo obrigatório não for informado ou possuir um valor inválido a API [retorna um erro](#respostas-de-erro).
+
+Campo      | Requerido | Tipo   | Sobre
+-----------|-----------|--------|------
+username   | Sim       | String | Username do usuário autor
+
+<details>
+<summary>Exemplo</summary>
+
+```
+{
+  "username": "Brielle48"
+}
+```
+</details>
+
+###### Resposta
+O [comentário](#comentário) atualizado.
+
+<details>
+<summary>Exemplo</summary>
+
+```
+{
+  "uuid": "f53c17e6-1d34-4b16-9e63-ad05d7d67064",
+  "user": {
+    "username": "Cali83",
+    "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/cyril_gaillard/128.jpg"
+  },
+  "message": "We need to transmit the auxiliary IB port!",
+  "created_at": "2020-10-09T23:02:20.716Z",
+  "has_liked": false,
+  "like_count": 1
+}
 ```
 </details>
 
@@ -119,17 +194,24 @@ A lista de [comentários](#comentário) atualizada com os últimos comentários 
 Campo      | Tipo   | Sobre
 -----------|--------|------
 username   | String | Apelido do usuário (não existe outro usuário com o mesmo apelido)
-avatar     | String | URL da foto do usuário. **Pode ser nulo**
+avatar     | String | URL da imagem do usuário. **Pode ser nulo**
 
 ### Publicação
 Campo      | Tipo   | Sobre
 -----------|--------|------
 uuid       | String | ID único da publicação
 user       | Object | Um [usuário](#usuário). O autor da publicação
-photo      | String | URL da foto da publicação
-created_at | String | Data de criação no formato ISO 8601
+photo      | String | URL da imagem da publicação
+created_at | String | Momento de criação
 location   | Object | Uma [localização](#localização)
 comments   | Array  | Uma lista de [comentários](#comentário)
+
+### Publicação relacionada
+Campo        | Tipo   | Sobre
+-------------|--------|------
+uuid         | String | ID único da publicação
+photo        | String | URL da imagem da publicação
+comment_count| Number | Quantidade de comentários na publicação
 
 ### Localização
 Campo      | Tipo   | Sobre
@@ -138,11 +220,14 @@ city       | String | Nome da cidade
 country    | String | Nome do país
 
 ### Comentário
-Campo      | Tipo   | Sobre
------------|--------|------
-user       | Object | Um [usuário](#usuário). O autor do comentário
-message    | String | Conteúdo do comentário
-created_at | String | Data de criação no formato ISO 8601
+Campo      | Tipo    | Sobre
+-----------|---------|------
+uuid       | String  | ID único do comentário
+user       | Object  | Um [usuário](#usuário). O autor do comentário
+message    | String  | Conteúdo do comentário
+created_at | String  | Momento de criação
+like_count | Number  | Quantidade de curtidas
+has_liked  | Boolean | Se o usuário já curtiu ou não esse comentário
 
 ## Respostas de erro
 
@@ -171,6 +256,15 @@ Campo      | Sobre
 type       | `user_not_found`
 status     | 400
 username   | `username` informado
+
+### Comentário não encontrado
+Lançado quando o `comment` informado não se refere a nenhum usuário válido.
+
+Campo      | Sobre
+-----------|------
+type       | `comment_not_found`
+status     | 400
+uuid       | `uuid` informado
 
 ### Campo requerido
 Lançado quando algum parâmetro obrigatório não é informado.

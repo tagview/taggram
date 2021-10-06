@@ -13,9 +13,10 @@ const buildUser = createFactory({
 });
 
 const buildComment = createFactory({
+  uuid: faker.datatype.uuid,
   user: buildUser,
   message: faker.hacker.phrase,
-  created_at: faker.date.past,
+  created_at: () => `${faker.number({ min: 1, max: 23 })}h`,
 });
 
 const buildLocation = createFactory({
@@ -24,10 +25,16 @@ const buildLocation = createFactory({
 });
 
 const buildPost = createFactory({
-  uuid: faker.random.uuid,
+  uuid: faker.datatype.uuid,
   user: buildUser,
   photo: () => "https://source.unsplash.com/random/800x800",
-  created_at: faker.date.past,
+  created_at: () => {
+    const random = faker.date.past();
+    const date = `${random.getDate()}/${random.getMonth() + 1}/${random.getFullYear()}`;
+    const time = `${random.getHours()}:${random.getMinutes()}`;
+
+    return `${date} - ${time}`;
+  },
   location: buildLocation,
 });
 
