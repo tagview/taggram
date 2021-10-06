@@ -34,7 +34,7 @@ const run = async () => {
   const data = await fs.readFile(postsFile, "utf8");
   const posts = JSON.parse(data);
   const users = posts.map(prop("user"));
-  const comments = {};
+  const comments = posts.reduce((result, post) => ({ ...result, [post.uuid]: [buildComment()] }), {});
   const context = { posts, users, comments, commentLimit, successRate };
 
   app.use(cors());

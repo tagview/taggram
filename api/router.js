@@ -1,6 +1,6 @@
 const faker = require("faker");
 const { Router } = require("express");
-const { propEq, pick, keys, takeLast, complement } = require("ramda");
+const { propEq, pick, keys, takeLast, complement, values, uniq } = require("ramda");
 const { Either } = require("ramda-fantasy");
 const { Random } = require("random-js");
 
@@ -29,7 +29,7 @@ const requirePostByUUID = posts => uuid => {
 const requireCommentByUUID = comments => uuid => {
   const comment = findCommentByUUID(comments)(uuid);
 
-  if (isBlank(post)) {
+  if (isBlank(comment)) {
     return Either.Left({
       status: 404,
       type: "comment_not_found",
@@ -38,7 +38,7 @@ const requireCommentByUUID = comments => uuid => {
     });
   }
 
-  return Either.of(post);
+  return Either.of(comment);
 };
 
 const requireUserByUsername = users => username => {
@@ -95,7 +95,7 @@ const build = ({ posts, users, comments, commentLimit, successRate }) => {
     const commentLikes = likes[comment.uuid] || [];
     const hasLiked = !!commentLikes.find(item => item === username);
 
-    return { ...comment, has_liked, like_count: commentLikes.length };
+    return { ...comment, has_liked: hasLiked, like_count: commentLikes.length };
   };
 
   const buildPost = username => post => {
@@ -105,10 +105,7 @@ const build = ({ posts, users, comments, commentLimit, successRate }) => {
   };
 
   router.get("/me", (req, res) => {
-    const hasAvatar = faker.datatype.boolean();
-    const user = hasAvatar ? buildUser() : buildUser({ avatar: null });
-
-    users = [...users, user];
+    const user = faker.random.arrayElement(users);
 
     res.json(user);
   });
@@ -124,7 +121,7 @@ const build = ({ posts, users, comments, commentLimit, successRate }) => {
       );
   });
 
-  router.get("/post/:uuid/related", (req, res) => {
+  router.get("/posts/:uuid/related", (req, res) => {
     const { uuid } = req.params;
 
     requirePostByUUID(posts)(uuid)

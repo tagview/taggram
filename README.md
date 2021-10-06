@@ -27,8 +27,8 @@ Desenvolvemos uma API REST que deve ser utilizada para obter os dados dos usuár
 2. A aplicação deve exibir a lista de publicações relacionadas ("mais publicações")
    a. Você deve exibir na lista **somente** as publicações relacionadas que possuírem **pelo menos 3 comentários**
 2. A aplicação deve permitir:
-    a. Que o usuário curta um comentário
-    b. Que o usuário remova a sua curtida de um comentário
+    a. Que o usuário curta um comentário, e atualizar o contador de curtidas
+    b. Que o usuário remova a sua curtida de um comentário, e atualizar o contador de curtidas
 3. Quando as requisições para [curtir ou remover curtida de um comentário falharem](API.md#atenção-warning), exibir um alerta avisando o usuário que o `Não foi possível curtir/descurtir comentário, tente novamente`. Você pode usar o `Window.alert` ou outro elemento visual para exibir essa mensagem
 4. Você pode continuar a implementação sem nenhum framework ou escolher entre ReactJS, AngularJS ou VueJS
 5. Você pode utilizar qualquer outra biblioteca que achar necessário (jQuery, por exemplo)

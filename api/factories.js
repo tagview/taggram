@@ -16,7 +16,7 @@ const buildComment = createFactory({
   uuid: faker.datatype.uuid,
   user: buildUser,
   message: faker.hacker.phrase,
-  created_at: () => `${faker.number({ min: 1, max: 23 })}h`,
+  created_at: () => `${faker.datatype.number({ min: 1, max: 23 })}h`,
 });
 
 const buildLocation = createFactory({

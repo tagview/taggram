@@ -70,7 +70,7 @@ Uma [publicação](#publicação) aleatória.
 ```
 </details>
 
-### GET /post/*{postUUID}*/related
+### GET /posts/*{postUUID}*/related
 Informa a lista de publicações relacionadas, deve ser exibida em "mais publicações". `{postUUID}` é o `uuid` da publicação exibida.
 
 ###### Resposta
