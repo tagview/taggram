@@ -14,7 +14,7 @@ A sua implementação deve se basear no [layout](#layout), obter os dados atrav�
 Em [/base](base) você encontra um esqueleto da aplicação com alguns exemplos, você pode aproveitar esses arquivos para implementar a sua solução.
 
 ### Layout
-Você pode visualizar o layout [clicando aqui](https://www.figma.com/file/96DdmM0aScr0uihjwx6LxM/Taggram?node-id=0%3A1). Ao se cadastrar no Figma você terá acesso às medidas, espaçamentos, cores e poderá baixar os ícones utilizados no layout. Também disponibilizamos [um protótipo](https://www.figma.com/proto/96DdmM0aScr0uihjwx6LxM/Taggram?node-id=1%3A2&viewport=396%2C310%2C0.5317721962928772&scaling=min-zoom) que simula o funcionamento da página.
+Você pode visualizar o layout [clicando aqui](https://www.figma.com/file/96DdmM0aScr0uihjwx6LxM/Taggram?node-id=1598%3A14). Ao se cadastrar no Figma você terá acesso às medidas, espaçamentos, cores e poderá baixar os ícones utilizados no layout. Também disponibilizamos [um protótipo](https://www.figma.com/proto/96DdmM0aScr0uihjwx6LxM/Taggram?page-id=0%3A1&node-id=1598%3A14&viewport=241%2C48%2C0.7&scaling=min-zoom) que simula o funcionamento da página.
 
 ### API
 Desenvolvemos uma API REST que deve ser utilizada para obter os dados dos usuários, publicações e comentários. Ela possui três endpoints, conheça cada um deles na [**documentação**](API.md). Use essa API à vontade durante o desenvolvimento.
