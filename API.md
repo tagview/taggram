@@ -8,7 +8,7 @@ https://taggram.herokuapp.com
 ## Endpoints
 
 ### GET /me
-Informa os dados de um usuário. É ele que aparece na barra do topo da página e deverá ser o autor dos comentários criados.
+Informa os dados de um usuário. É ele que aparece na barra do topo da página e deverá ser o autor das curtidas feitas.
 
 ###### Resposta
 Um [usuário](#usuário) aleatório.
@@ -111,7 +111,7 @@ Deve seguir o formato `application/json`. Se algum campo obrigatório não for i
 
 Campo      | Requerido | Tipo   | Sobre
 -----------|-----------|--------|------
-username   | Sim       | String | Username do usuário autor
+username   | Sim       | String | Username do usuário adicionando a curtida
 
 <details>
 <summary>Exemplo</summary>
@@ -148,14 +148,14 @@ O [comentário](#comentário) atualizado.
 **Remove** uma curtida em um comentário. `{commentUUID}` é o `uuid` do comentário selecionado.
 
 ##### ATENÇÃO :warning:
-> Esse endpoint retorna [um erro](#erro-aleatório) **intencionalmente** algumas vezes, você deve tratar esse erro como está [especificado nos requisitos](README.md#requisitos). Porém, durante o desenvolvimento você pode forçar que os erros deixem de ser lançados utilizando o parâmetro `force`: `POST /comments/*{commentUUID}*/like?force=true`.
+> Esse endpoint retorna [um erro](#erro-aleatório) **intencionalmente** algumas vezes, você deve tratar esse erro como está [especificado nos requisitos](README.md#requisitos). Porém, durante o desenvolvimento você pode forçar que os erros deixem de ser lançados utilizando o parâmetro `force`: `POST /comments/*{commentUUID}*/unlike?force=true`.
 
 ###### Requisição
 Deve seguir o formato `application/json`. Se algum campo obrigatório não for informado ou possuir um valor inválido a API [retorna um erro](#respostas-de-erro).
 
 Campo      | Requerido | Tipo   | Sobre
 -----------|-----------|--------|------
-username   | Sim       | String | Username do usuário autor
+username   | Sim       | String | Username do usuário removendo a curtida
 
 <details>
 <summary>Exemplo</summary>
