@@ -27,12 +27,7 @@ const buildLocation = createFactory({
 const buildPost = createFactory({
   uuid: faker.datatype.uuid,
   user: buildUser,
-  photo: (width = 800, height = 800) => {
-    const url = faker.image.unsplash.imageUrl(width, height);
-    const key = faker.datatype.uuid();
-
-    return `${url}?key=${key}`;
-  },
+  photo: () => `https://source.unsplash.com/random/800x800?x=${faker.datatype.uuid()}`,
   created_at: () => {
     const random = faker.date.past();
     const date = `${random.getDate()}/${random.getMonth() + 1}/${random.getFullYear()}`;
