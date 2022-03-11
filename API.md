@@ -48,7 +48,7 @@ Uma [publicação](#publicação) aleatória.
     "avatar": null
   },
   "photo": "https://source.unsplash.com/random/800x800",
-  "created_at": "2020-03-01T10:49:08.880Z",
+  "created_at": "17/8/2021 - 13:55",
   "location": {
     "city": "Robertsberg",
     "country": "Kyrgyz Republic"
@@ -61,7 +61,7 @@ Uma [publicação](#publicação) aleatória.
         "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/cyril_gaillard/128.jpg"
       },
       "message": "We need to transmit the auxiliary IB port!",
-      "created_at": "2020-10-09T23:02:20.716Z",
+      "created_at": "9h",
       "has_liked": true,
       "like_count": 2
     }
@@ -137,7 +137,7 @@ O [comentário](#comentário) atualizado.
     "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/cyril_gaillard/128.jpg"
   },
   "message": "We need to transmit the auxiliary IB port!",
-  "created_at": "2020-10-09T23:02:20.716Z",
+  "created_at": "9h",
   "has_liked": true,
   "like_count": 2
 }
@@ -181,7 +181,7 @@ O [comentário](#comentário) atualizado.
     "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/cyril_gaillard/128.jpg"
   },
   "message": "We need to transmit the auxiliary IB port!",
-  "created_at": "2020-10-09T23:02:20.716Z",
+  "created_at": "9h",
   "has_liked": false,
   "like_count": 1
 }

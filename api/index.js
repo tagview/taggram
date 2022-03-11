@@ -44,7 +44,7 @@ const run = async () => {
   setInterval(() => {
     posts.forEach(post => {
       const user = faker.random.arrayElement(users);
-      const comment = buildComment({ user, created_at: new Date() });
+      const comment = buildComment({ user });
       const postComments = comments[post.uuid] || [];
 
       comments[post.uuid] = takeLast(commentLimit, [...postComments, comment]);
